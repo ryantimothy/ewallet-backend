@@ -1,0 +1,140 @@
+openapi: 3.0.0
+info:
+  title: ewallet
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+paths:
+  /transaction:
+    get:
+      tags:
+        - General
+      summary: Get All Transaction
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example: []
+  /register:
+    post:
+      tags:
+        - General
+      summary: Register User
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                Email: test@gmail.com
+                Password: jordyimbiri
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                UserID: 14
+                Email: dokuchan135@gmail.com
+                WalletID: 100018
+  /login:
+    post:
+      tags:
+        - General
+      summary: Login User
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                Email: dokuchan135@gmail.com
+                Password: jordyimbiri
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                Token: >-
+                  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2NjU2NTI3NzUsInVzZXJfaWQiOjE0fQ.ul6GMKE834f9HT09q3akMVL92LaP9QdT8lpKVynNpt0
+  /user:
+    get:
+      tags:
+        - General
+      summary: Get User Detail
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                UserID: 9
+                Email: ryantimothy766@gmail.com
+                UserWallet:
+                  WalletId: 100012
+                  Balance: 660000
+                  CreatedAt: '2022-10-12T23:02:52.04911Z'
+                  UpdatedAt: '2022-10-12T23:02:52.049327Z'
+                  DeletedAt: null
+  /transfer:
+    post:
+      tags:
+        - General
+      summary: Transfer
+      requestBody:
+        content: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                Recipient: 100001
+                Amount: 10000
+                Description: indomie goreng
+  /topup:
+    post:
+      tags:
+        - General
+      summary: TopUp
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                Amount: 500000
+                SourceOfFundID: 2
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                Amount: 500000
+                SourceOfFundID: 2
